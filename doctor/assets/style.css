@@ -1,0 +1,59 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.container-main{
+    width: 100%;
+    height: 100vh;
+}
+.container-main .left-side{
+    position: fixed;
+    width: 330px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    height: 100vh;
+    background: blue;
+}
+.container-main .left-side .welcome{
+    margin-top: 20px;
+    height: 40px;
+}
+.container-main .left-side .list-group a{
+    background: blue;
+}
+.container-main .right-side{
+    position: absolute;
+    width: calc(100% - 330px);
+    height: 100vh;
+    left: 330px;
+    overflow: hidden;
+}
+
+.container-main .right-side .top-navbar-hd{
+    position: fixed;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    height: 60px;
+    padding: 15px;
+    width: 100%;
+}
+.container-main .right-side .top-navbar-hd .top-navbar-content{
+    width: calc(100% - 330px);
+    display: flex;
+    justify-content: space-between;
+}
+.container-main .right-side .top-navbar-hd .top-navbar-content .nav-page{
+    font-size: 20px;
+}
+
+.container-main .right-side .main-content{
+    position: absolute;
+    height: calc(100vh - 60px);
+    top: 70px;
+    left: 10px;
+    width: calc(100% -10px);
+    right: 10px;
+    overflow-y: auto;
+}
+
