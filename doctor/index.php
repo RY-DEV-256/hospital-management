@@ -3,10 +3,11 @@ session_start();
 $page = $_REQUEST['page'] ?? 'dashboard';
 
 include("../parts/db-con.php");
-if (!isset($_SESSION['doctor'])) {
+if (!isset($_SESSION['doctor']) && !isset($_SESSION['id'])) {
     header("location:../index.php");
     exit();
 } else {
+    $doc_id = $_SESSION["id"];
     $username = $_SESSION['doctor'];
 }
 ?>
@@ -30,6 +31,7 @@ if (!isset($_SESSION['doctor'])) {
     <div class="container-main">
         <div class="left-side bg-primary">
             <div class="welcome">
+
                 <!-- <h5 class="text-dark text-center">Welcome to Dashboard</h5> -->
             </div>
             <div class="list-group">
@@ -96,10 +98,10 @@ if (!isset($_SESSION['doctor'])) {
                                 </a>
 
                             </li>
-                            
+
                             <li>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                <i class="fa fa-sign-out"></i>Logout
+                                    <i class="fa fa-sign-out"></i>Logout
                                 </button>
                             </li>
 
@@ -214,6 +216,146 @@ if (!isset($_SESSION['doctor'])) {
                                 <td></td>
                             </tr>
                         </table>
+                    </div>
+                <?php
+                }
+                if ($page == 'myprofile') {
+                ?>
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <div class="row mt-3">
+                                <div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded">
+                                    <?php
+                                    include("../parts/db-con.php");
+                                    $doc_id = $_SESSION["id"];
+                                    $profile = $connection->query("SELECT * FROM doctors WHERE doctor_id = $doc_id");
+                                    $profile_row = $profile->fetch_assoc();
+                                    ?>
+                                    <div class="profile-img text-center">
+                                        <img src="assets/img/<?php echo $profile_row['profile_image']; ?>" style="width:150px;height:150px;border-radius:50%;border:5px solid purple;padding:2px;">
+                                    </div>
+                                    
+                                    <div class="col-md-12 mt-5">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5> First Name:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['first_name']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Last Name:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['last_name']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Userame:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['username']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Specialization:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['specialization']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Email:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['email']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Address:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['address']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Phone Number:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['phone_number']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h5>Department:</h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <?= $profile_row['department']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded">
+                                    <form action="" method="post">
+                                    <h5 class="text-center my-3">Edit Profile</h5>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="profile">Change Profile Picture</label>
+                                        <input type="file" name="profile" id="profile" class="form-control">
+                                    </div>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="username">Change Username</label>
+                                        <input type="text" name="username" id="username" value="<?= $profile_row['username']; ?>" class="form-control">
+                                    </div>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="address">Change Address</label>
+                                        <input type="text" name="address" id="address" value="<?= $profile_row['address']; ?>" class="form-control">
+                                    </div>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="phone">Change Phone Number</label>
+                                        <input type="text" name="phone" id="phone" value="<?= $profile_row['phone_number']; ?>" class="form-control">
+                                    </div>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="email">Change Email</label>
+                                        <input type="email" name="email" id="email" value="<?= $profile_row['email']; ?>" class="form-control">
+                                    </div>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="password">Change Password</label>
+                                        <input type="password" name="password" id="password" placeholder="Enter Old Password" class="form-control">
+                                    </div>
+                                    <div class="form-group-my-3">
+                                        <label class="form-label" for="cpassword">Change Password</label>
+                                        <input type="password" name="cpassword" id="cpassword" placeholder="Enter New Password" class="form-control">
+                                    </div>
+                                    <div class="form-group my-3">
+                                    <input type="submit" value="Edit" name="edit_profile" class="btn btn-primary">
+                                    </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 <?php
                 }

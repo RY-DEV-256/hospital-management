@@ -3,6 +3,7 @@ session_start();
 include("parts/db-con.php");
 $doc_username = "";
 $doc_password = "";
+$doc_id = "";
 $page = $_REQUEST['page'] ?? 'patient';
 ?>
 <?php
@@ -191,12 +192,7 @@ include("parts/header.php");
                     ?>
                         <?php
 
-                        $doctor_info = $connection->query('SELECT * FROM doctors');
-
-                        while ($row_doctor = $doctor_info->fetch_assoc()) {
-                            $doc_username = $row_doctor['username'];
-                            $doc_password = $row_doctor['password'];
-                        }
+                       
 
                         if (isset($_POST['doctor_login'])) {
                             $username = $_POST['uname'];
@@ -210,14 +206,25 @@ include("parts/header.php");
                                 $error['error'] = 'Enter Doctor Username !';
                             } else if (empty($password)) {
                                 $error['error'] = 'Enter Doctor Password !';
-                            } else if ($username != $doc_username || $password != $doc_password) {
-                                $error['error'] = 'Invalid Password or Username!';
-                            }
-                            if ($username == $doc_username and $password == $doc_password) {
 
-                                $_SESSION['dlogin_success'] = "Logged in successfully";
-                                $_SESSION['doctor'] = "$username";
+                            }else{
+                                $doctor_info = $connection->query("SELECT * FROM doctors WHERE username = '$username' AND `password` = '$password'");
+
+                                while ($row_doctor = $doctor_info->fetch_assoc()) {
+                                    $doc_username = $row_doctor['username'];
+                                    $doc_password = $row_doctor['password'];
+                                    $doc_id = $row_doctor['doctor_id'];
+                                }
+                                if ($username == $doc_username and $password == $doc_password) {
+
+                                    $_SESSION['dlogin_success'] = "Logged in successfully";
+                                    $_SESSION['doctor'] = $username;
+                                    $_SESSION["id"] = $doc_id;
+                                }else{
+                                    $error["error"] = "Invalid Username or Password";
+                                }
                             }
+                            
                         }
                         ?>
                         <form action="" method="post" class="shadow p-3 mb-5 bg-body-tertiary rounded" style="border-radius:10px;">
