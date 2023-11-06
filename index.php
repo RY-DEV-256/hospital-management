@@ -34,11 +34,6 @@ include("parts/header.php");
                     ?>
                         <?php
 
-                        $sql = $connection->query("SELECT * FROM patients");
-                        $row = $sql->fetch_assoc();
-
-                        $taken_email = $row["email"];
-
                         if (isset($_POST["register"])) {
                             $fname = $_POST['fname'];
                             $lname = $_POST['lname'];
@@ -57,8 +52,8 @@ include("parts/header.php");
                                 $error["error"] = "Enter Last Name !";
                             } else if (empty($email)) {
                                 $error["error"] = "Enter Email !";
-                            } else if ($email == $taken_email) {
-                                $error["error"] = "Use A Unique Email !";
+                            // } else if ($email == $taken_email) {
+                            //     $error["error"] = "Use A Unique Email !";
                             } else if (empty($phone)) {
                                 $error["error"] = "Enter Phone Number !";
                             } else if (empty($dob)) {
