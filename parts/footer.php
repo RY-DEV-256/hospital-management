@@ -45,7 +45,7 @@
             alertify.set('notifier', 'position', 'top-right');
             alertify.success('<?= $_SESSION['admin_login_success']; ?>');
             setTimeout(function() {
-                window.location.href = "";
+                window.location.href = "admin/index.php";
             }, 3000);
         </script>
     <?php
