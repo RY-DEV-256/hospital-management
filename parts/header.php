@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/alertify/alertify.min.css">
     <link rel="stylesheet" href="assets/alertify/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <style>
     body {
@@ -53,7 +55,7 @@
 <body>
 <nav class="autohide navbar navbar-expand-sm bg-primary">
         <div class="container-fluid p-3">
-        <a class="navbar-brand text-white" href="index.php">Hospital Management</a>
+        <a class="navbar-brand text-white" href="index.php">St. Elizabeth Hospital</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks"><span><i class="navbar-toggler-icon"></i></span></button>
             <div class="collapse navbar-collapse justify-content-center" id="navLinks">
                 <ul class="navbar-nav ms-auto">
@@ -61,14 +63,10 @@
                         <a href="index.php" class="nav-link text-white">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#home" class="nav-link text-white">Jobs</a>
+                        <a href="aboutus.php" class="nav-link text-white">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link text-white">About Us</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link text-white">Contact Us</a>
+                        <a href="contactus.php" class="nav-link text-white">Contact Us</a>
                     </li>
                 </ul>
             </div>

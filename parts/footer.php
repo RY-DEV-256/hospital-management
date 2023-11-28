@@ -1,3 +1,4 @@
+
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/alertify/alertify.min.js"></script>
     <script>
@@ -79,10 +80,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function(){
             el_autohide = document.querySelector('.autohide');
-
-            // add padding-top to body (if necessary)
-            // navbar_height = document.querySelector('.navbar').offsetHeight;
-            // document.body.style.paddingTop = navbar_height + 'px';
 
             if(el_autohide){
                 var last_scroll_top = 0;
